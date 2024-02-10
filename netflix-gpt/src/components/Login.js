@@ -6,22 +6,15 @@ import { auth } from '../utils/firebase';
 import { createUserWithEmailAndPassword,signInWithEmailAndPassword} from 'firebase/auth';
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux"
-import { addUser } from '../utils/userSlice';
+import { addUser, removeUser } from '../utils/userSlice';
 import { onAuthStateChanged ,updateProfile} from 'firebase/auth';
+import { USER_AVATAR } from '../utils/constants';
 const Login = () => {
     const dispatch=useDispatch();
     const [isSignIn, setIsSignIn]=useState(true);
     const [errorMessage,setErrorMessage]=useState(null);
 
-    onAuthStateChanged(auth, (user) => {
-        console.log(user)
-        if (user) {
-          
-          dispatch(addUser(user.toJSON()))
-        } else {
-          
-        }
-      });
+    
     
  
     const toggleIt=()=>{
@@ -57,16 +50,17 @@ const Login = () => {
                 .then((userCredential) => {
                   // Signed up 
                   const user = userCredential.user;
+                  console.log(user);
                   updateProfile(auth.currentUser, {
-                    displayName: name.current.value
+                    displayName:name.current.value,
+                   photoURL:USER_AVATAR,
                   }).then(() => {
-                    const {email,displayName}=auth.currentUser
-                    dispatch(addUser({email:email,displayName:displayName}));
+                   
                   }).catch((error) => {
-                
+                console.log("error",error)
                   });
                   
-                  navigate("/browse");
+                //   navigate("/browse");
                 })
                 .catch((error) => {
                   const errorCode = error.code;
@@ -75,15 +69,11 @@ const Login = () => {
                   // ..
                 });
             }
-              }
               else{
                 signInWithEmailAndPassword(auth, email.current.value, password.current.value)
                 .then((userCredential) => {
                   // Signed in 
-                  console.log("hogya sign in")
-                  const user = userCredential.user;
-                  console.log(user)
-                  navigate("/browse");
+                  
                   
                 })
                 .catch((error) => {
@@ -96,7 +86,7 @@ const Login = () => {
         }
 
     
-
+    }
     
   return (
     <div className=''>

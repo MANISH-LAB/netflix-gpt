@@ -1,18 +1,17 @@
 import React from 'react'
-import {useSelector} from "react-redux";
 import Header from './Header';
+import usePlayingnowMovies from '../hooks/usePlayingNowMovies';
+import MainContainer from './MainContainer';
+import SecondaryContainer from './SecondaryContainer';
 const Browse = () => {
-  const userData=useSelector((store)=>store.user)
-  console.log(userData)  
+  usePlayingnowMovies();
 
   return (
     <div>
       <Header/>
-      <div className='p-32'>
-      <h1>{userData && ("Welcome "+ userData.displayName)}</h1>
-      </div>
-      </div>
-      
+      <MainContainer/>
+      <SecondaryContainer/>
+      </div>      
   )
 }
 
