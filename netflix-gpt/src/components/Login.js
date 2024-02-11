@@ -8,7 +8,7 @@ import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux"
 import { addUser, removeUser } from '../utils/userSlice';
 import { onAuthStateChanged ,updateProfile} from 'firebase/auth';
-import { USER_AVATAR } from '../utils/constants';
+import { BG_IMG, USER_AVATAR } from '../utils/constants';
 const Login = () => {
     const dispatch=useDispatch();
     const [isSignIn, setIsSignIn]=useState(true);
@@ -130,7 +130,7 @@ const Login = () => {
         </form>
         </div>
         <div>
-        <img src="https://assets.nflxext.com/ffe/siteui/vlv3/4da5d2b1-1b22-498d-90c0-4d86701dffcc/98a1cb1e-5a1d-4b98-a46f-995272b632dd/IN-en-20240129-popsignuptwoweeks-perspective_alpha_website_small.jpg"
+        <img src={BG_IMG}
         alt="bg"
         className=' '
         

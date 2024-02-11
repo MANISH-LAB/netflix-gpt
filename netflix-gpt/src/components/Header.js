@@ -12,6 +12,7 @@ const Header = () => {
  const [state,setState]=useState(false);
  const dispatch=useDispatch()
  const navigate=useNavigate();
+
   useEffect(()=>{const unsubscribe=onAuthStateChanged(auth, (user) => {
     console.log("added",user)
     if (user) {
@@ -29,7 +30,7 @@ const Header = () => {
 
 },[])
   return (
-    <div className="bg-gradient-to-b fixed top-0 left-0 right-0 from-zinc-950  z-50 justify-between flex">
+    <div className="bg-gradient-to-b absolute from-zinc-950  z-50 justify-between flex">
         <img src={LOGO}
         alt="netflix logo"
         className="px-8 py-2 w-2/12 "
